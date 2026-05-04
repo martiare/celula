@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+
+echo "[1/2] Build da imagem visao-celula..."
+docker build --no-cache -t visao-celula:latest .
+
+echo "[2/2] Atualizando servico no Swarm..."
+docker service update --force --image visao-celula:latest visao-celula_app
+
+echo "Deploy concluido."
